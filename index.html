@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>داریوش | سپاه ساسانی</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#17251d;
+ color:white;
+ font-family:Tahoma,Arial,sans-serif;
+ overflow:hidden;
+}
+header{
+ height:48px;
+ background:#253c2c;
+ border-bottom:2px solid #c4a15b;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ font-size:19px;
+ font-weight:bold;
+}
+#stats{
+ display:flex;
+ justify-content:space-around;
+ align-items:center;
+ height:48px;
+ background:#192c20;
+ font-size:12px;
+}
+.stat{
+ border:1px solid #b99a58;
+ border-radius:9px;
+ padding:7px;
+}
+#world{
+ width:100%;
+ height:calc(100dvh - 280px);
+ min-height:260px;
+ display:block;
+ background:#929f6d;
+}
+#message{
+ min-height:43px;
+ padding:8px;
+ text-align:center;
+ background:#263c2c;
+ font-size:12px;
+ line-height:1.8;
+}
+#controls{
+ background:#17251d;
+ padding:5px;
+}
+#move{
+ display:grid;
+ grid-template-columns:repeat(3,55px);
+ justify-content:center;
+ gap:4px;
+ margin:4px auto 9px;
+}
+button{
+ border:1px solid #d4b66f;
+ border-radius:10px;
+ background:#304a36;
+ color:white;
+ font-family:Tahoma;
+ font-size:14px;
+ font-weight:bold;
+ padding:10px 4px;
+}
+#move button{font-size:21px}
+#actions{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:6px;
+}
+button:active{background:#b18b48;color:#171717}
+svg{width:100%;height:100%}
+</style>
+</head>
+
+<body>
+
+<header>⚔️ داریوش | روزگار ساسانی ⚔️</header>
+
+<div id="stats">
+ <div class="stat">❤️ <b id="hp">100</b></div>
+ <div class="stat">🪙 <b id="money">35</b></div>
+ <div class="stat">🛡️ <b id="armor">ساده</b></div>
+ <div class="stat">🏅 <b id="rank">جوان‌سرباز</b></div>
+</div>
+
+<svg id="world" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet">
+
+<defs>
+ <linearGradient id="ground" x2="0" y2="1">
+  <stop stop-color="#aab47c"/>
+  <stop offset="1" stop-color="#78884e"/>
+ </linearGradient>
+ <linearGradient id="stone" x2="0" y2="1">
+  <stop stop-color="#d5b786"/>
+  <stop offset="1" stop-color="#92704c"/>
+ </linearGradient>
+ <linearGradient id="cloth" x2="0" y2="1">
+  <stop stop-color="#4775a0"/>
+  <stop offset="1" stop-color="#203d60"/>
+ </linearGradient>
+</defs>
+
+<!-- زمین -->
+<rect width="800" height="600" fill="url(#ground)"/>
+
+<!-- مسیرهای سنگی -->
+<path d="M340 0 H470 V600 H340 Z" fill="#c6b48c"/>
+<path d="M0 300 H800 V390 H0 Z" fill="#c6b48c"/>
+
+<!-- کاشی‌های مسیر -->
+<g stroke="#ad9b76" stroke-width="3" opacity=".7">
+<path d="M340 100H470 M340 200H470 M340 300H470 M340 400H470 M340 500H470"/>
+<path d="M100 300V390 M200 300V390 M300 300V390 M500 300V390 M600 300V390 M700 300V390"/>
+</g>
+
+<!-- دیوار شهر -->
+<path d="M0 80 H800 V120 H0 Z" fill="#846443"/>
+<path d="M0 70 H800 V91 H0 Z" fill="#c3a477"/>
+<g fill="#d4b58a">
+<rect x="20" y="55" width="45" height="30"/>
+<rect x="110" y="55" width="45" height="30"/>
+<rect x="200" y="55" width="45" height="30"/>
+<rect x="550" y="55" width="45" height="30"/>
+<rect x="650" y="55" width="45" height="30"/>
+<rect x="740" y="55" width="45" height="30"/>
+</g>
+
+<!-- دروازه -->
+<path d="M335 120 V65 Q405 -10 475 65 V120 Z" fill="#705238"/>
+<path d="M355 120 V70 Q405 15 455 70 V120 Z" fill="#382c22"/>
+<path d="M375 120 V80 Q405 45 435 80 V120 Z" fill="#65462e"/>
+
+<!-- ساختمان چپ -->
+<g>
+<rect x="55" y="165" width="190" height="125" fill="#74563a"/>
+<rect x="45" y="145" width="190" height="125" rx="8" fill="url(#stone)" stroke="#684b32" stroke-width="8"/>
+<path d="M45 145 L140 95 L235 145 Z" fill="#a47b4e" stroke="#684b32" stroke-width="5"/>
+<rect x="112" y="205" width="55" height="65" rx="25" fill="#533c2b"/>
+<rect x="65" y="175" width="35" height="35" fill="#536b63"/>
+<rect x="185" y="175" width="35" height="35" fill="#536b63"/>
+</g>
+
+<!-- ساختمان راست -->
+<g>
+<rect x="555" y="165" width="190" height="125" fill="#74563a"/>
+<rect x="565" y="145" width="190" height="125" rx="8" fill="url(#stone)" stroke="#684b32" stroke-width="8"/>
+<path d="M565 145 L660 95 L755 145 Z" fill="#a47b4e" stroke="#684b32" stroke-width="5"/>
+<rect x="632" y="205" width="55" height="65" rx="25" fill="#533c2b"/>
+<rect x="580" y="175" width="35" height="35" fill="#536b63"/>
+<rect x="705" y="175" width="35" height="35" fill="#536b63"/>
+</g>
+
+<!-- خانه‌های پایین -->
+<g>
+<rect x="45" y="440" width="160" height="105" fill="#ad895b" stroke="#674a31" stroke-width="7"/>
+<path d="M35 440 L125 390 L215 440 Z" fill="#84613e"/>
+<rect x="100" y="490" width="45" height="55" fill="#493528"/>
+
+<rect x="590" y="440" width="160" height="105" fill="#ad895b" stroke="#674a31" stroke-width="7"/>
+<path d="M580 440 L670 390 L760 440 Z" fill="#84613e"/>
+<rect x="645" y="490" width="45" height="55" fill="#493528"/>
+</g>
+
+<!-- درخت‌ها -->
+<g>
+<rect x="275" y="210" width="14" height="55" fill="#60442b"/>
+<circle cx="282" cy="200" r="35" fill="#536d3e"/>
+<circle cx="265" cy="215" r="23" fill="#627c45"/>
+
+<rect x="510" y="420" width="14" height="55" fill="#60442b"/>
+<circle cx="517" cy="405" r="35" fill="#536d3e"/>
+<circle cx="500" cy="420" r="23" fill="#627c45"/>
+</g>
+
+<!-- پرچم -->
+<path d="M405 80V20" stroke="#493729" stroke-width="6"/>
+<path d="M408 22 L470 40 L408 57 Z" fill="#b34235"/>
+<circle cx="408" cy="20" r="6" fill="#e1c16e"/>
+
+<!-- شهر -->
+<text x="400" y="145" font-size="25" text-anchor="middle" fill="#fff" font-weight="bold">بیشاپور</text>
+
+<!-- شخصیت‌ها -->
+<g id="npc1" transform="translate(255 350)">
+ <ellipse cy="35" rx="22" ry="8" fill="#3d4930" opacity=".5"/>
+ <rect x="-14" y="-8" width="28" height="40" rx="7" fill="#947348"/>
+ <circle cy="-23" r="13" fill="#d6a57e"/>
+ <path d="M-13 -28 Q0 -49 13 -28 Z" fill="#5e4731"/>
+ <text y="-55" text-anchor="middle" font-size="17" fill="white">فرمانده</text>
+</g>
+
+<g id="npc2" transform="translate(550 350)">
+ <ellipse cy="35" rx="22" ry="8" fill="#3d4930" opacity=".5"/>
+ <rect x="-14" y="-8" width="28" height="40" rx="7" fill="#927b55"/>
+ <circle cy="-23" r="13" fill="#d6a57e"/>
+ <path d="M-13 -28 Q0 -49 13 -28 Z" fill="#493b2e"/>
+ <text y="-55" text-anchor="middle" font-size="17" fill="white">بازرگان</text>
+</g>
+
+<!-- دشمن -->
+<g id="enemy" transform="translate(620 500)">
+ <ellipse cy="35" rx="22" ry="8" fill="#3d4930" opacity=".5"/>
+ <rect x="-14" y="-8" width="28" height="40" rx="7" fill="#873d36"/>
+ <circle cy="-23" r="13" fill="#d6a57e"/>
+ <path d="M-13 -28 Q0 -49 13 -28 Z" fill="#3a2824"/>
+ <path d="M15 -10 L35 -32" stroke="#d9d0ba" stroke-width="5"/>
+ <text y="-55" text-anchor="middle" font-size="17" fill="white">شورشی</text>
+</g>
+
+<!-- بازیکن -->
+<g id="player" transform="translate(400 480)">
+ <ellipse cy="35" rx="24" ry="9" fill="#3d4930" opacity=".6"/>
+ <rect x="-15" y="-10" width="30" height="43" rx="7" fill="url(#cloth)" stroke="#b89a59" stroke-width="3"/>
+ <rect x="-16" y="20" width="12" height="23" fill="#45392b"/>
+ <rect x="4" y="20" width="12" height="23" fill="#45392b"/>
+ <circle cy="-27" r="14" fill="#d6a57e"/>
+ <path d="M-15 -31 Q0 -55 15 -31 Z" fill="#c09a4d" stroke="#70532c" stroke-width="3"/>
+ <path d="M15 -8 L35 -38" stroke="#e4d9b9" stroke-width="5"/>
+ <path d="M35 -38 L40 -46" stroke="#84633c" stroke-width="7"/>
+ <text y="-65" text-anchor="middle" font-size="19" fill="white" font-weight="bold">داریوش</text>
+</g>
+
+</svg>
+
+<div id="message">
+ به بیشاپور خوش آمدی، داریوش! به فرمانده نزدیک شو.
+</div>
+
+<div id="controls">
+
+<div id="move">
+ <span></span><button onclick="move(0,-20)">▲</button><span></span>
+ <button onclick="move(-20,0)">◀</button>
+ <button onclick="move(0,20)">▼</button>
+ <button onclick="move(20,0)">▶</button>
+</div>
+
+<div id="actions">
+ <button onclick="talk()">💬 تعامل</button>
+ <button onclick="defend()">🛡️ دفاع</button>
+ <button onclick="attack()">⚔️ حمله</button>
+ <button onclick="mission()">📜 مأموریت</button>
+ <button onclick="shop()">🎒 تجهیزات</button>
+ <button onclick="travel()">🗺️ شهر بعدی</button>
+</div>
+
+</div>
+
+<script>
+let x=400,y=480;
+let coins=35;
+let hp=100;
+let armored=false;
+let enemyAlive=true;
+let city=0;
+
+const cities=["بیشاپور","گور","اصطخر","تیسفون","کرمان","ری","مرو"];
+
+const player=document.getElementById("player");
+const enemy=document.getElementById("enemy");
+
+function say(t){
+ document.getElementById("message").textContent=t;
+}
+
+function update(){
+ player.setAttribute("transform","translate("+x+" "+y+")");
+ document.getElementById("hp").textContent=hp;
+ document.getElementById("money").textContent=coins;
+}
+
+function move(dx,dy){
+ x=Math.max(35,Math.min(765,x+dx));
+ y=Math.max(155,Math.min(565,y+dy));
+ update();
+}
+
+function distance(ax,ay,bx,by){
+ return Math.hypot(ax-bx,ay-by);
+}
+
+function talk(){
+ if(distance(x,y,255,350)<100){
+  say("فرمانده: داریوش! شهر در خطر است. شورشی‌ها را از بین ببر.");
+ }else if(distance(x,y,550,350)<100){
+  say("بازرگان: زره و تجهیزات برای فروش دارم.");
+ }else{
+  say("به فرمانده یا بازرگان نزدیک شو تا با آن‌ها صحبت کنی.");
+ }
+}
+
+function attack(){
+ if(!enemyAlive){
+  say("دشمنی در اطراف نیست.");
+  return;
+ }
+ if(distance(x,y,620,500)<110){
+  enemyAlive=false;
+  enemy.style.display="none";
+  coins+=15;
+  update();
+  say("شورشی شکست خورد! ۱۵ سکه به دست آوردی.");
+ }else{
+  say("برای حمله به شورشی نزدیک‌تر شو.");
+ }
+}
+
+function defend(){
+ say("حالت دفاع فعال شد. سپرت را آماده نگه دار.");
+}
+
+function mission(){
+ coins+=10;
+ update();
+ say("مأموریت نگهبانی انجام شد. ۱۰ سکه پاداش گرفتی.");
+}
+
+function shop(){
+ if(armored){
+  say("زره فلزی داری.");
+  return;
+ }
+ if(coins>=20){
+  coins-=20;
+  armored=true;
+  document.getElementById("armor").textContent="فلزی";
+  update();
+  say("زره فلزی خریدی!");
+ }else{
+  say("برای خرید زره به ۲۰ سکه نیاز داری.");
+ }
+}
+
+function travel(){
+ city=(city+1)%cities.length;
+ document.querySelector("svg text").textContent=cities[city];
+ x=400;y=480;
+ enemyAlive=true;
+ enemy.style.display="block";
+ update();
+ say("به "+cities[city]+" رسیدی. ماجراجویی ادامه دارد!");
+}
+
+window.addEventListener("keydown",function(e){
+ if(e.key==="ArrowUp")move(0,-20);
+ if(e.key==="ArrowDown")move(0,20);
+ if(e.key==="ArrowLeft")move(-20,0);
+ if(e.key==="ArrowRight")move(20,0);
+});
+
+update();
+</script>
+
+</body>
+</html>
